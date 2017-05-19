@@ -16,6 +16,8 @@ RUN pip --no-cache-dir install \
         && \
 python -m ipykernel.kernelspec
 
+COPY jupyter_notebook_config.py /root/.jupyter/
+
 EXPOSE 8888
 
 RUN mkdir /notebooks
