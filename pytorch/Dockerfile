@@ -23,6 +23,6 @@ WORKDIR "/notebooks"
 
 COPY start-jupyter.sh /
 
-CMD ["/start_jupyter.sh"]
+CMD ["/start-jupyter.sh"]
 
 
