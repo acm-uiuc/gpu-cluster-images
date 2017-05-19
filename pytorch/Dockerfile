@@ -21,7 +21,7 @@ EXPOSE 8888
 RUN mkdir /notebooks
 WORKDIR "/notebooks"
 
-COPY start_jupyter.sh /
+COPY start-jupyter.sh /
 
 CMD ["/start_jupyter.sh"]
 
