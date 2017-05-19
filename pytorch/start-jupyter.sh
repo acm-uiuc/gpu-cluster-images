@@ -1,1 +1,1 @@
-jupyter notebook --allow-root
+jupyter notebook "$@"
