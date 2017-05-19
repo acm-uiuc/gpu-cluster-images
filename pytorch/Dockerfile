@@ -21,4 +21,8 @@ EXPOSE 8888
 RUN mkdir /notebooks
 WORKDIR "/notebooks"
 
-CMD ["jupyter notebook --allow-root"]
+COPY run_jupyter.sh /
+
+CMD ["/start_jupyter.sh"]
+
+
