@@ -21,4 +21,4 @@ EXPOSE 8888
 RUN mkdir /notebooks
 WORKDIR "/notebooks"
 
-#CMD ["jupyter notebook \"$@\""]
+CMD ["jupyter notebook --allow-root"]
