@@ -24,7 +24,6 @@ WORKDIR "/notebooks"
 COPY start-jupyter.sh /
 RUN chmod +x /start-jupyter.sh
 
-CMD ["python3"]
-#CMD ["/start-jupyter.sh",  "--allow-root"]
+CMD ["/start-jupyter.sh",  "--allow-root"]
 
 
