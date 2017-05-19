@@ -9,5 +9,5 @@ docker build -t acm-uiuc/pytorch .
 
 Run with NVIDIA Docker 
 ```
-NV_GPU=[device_id] nvidia-docker run --rm -ti --ipc=host -p 8888:8888 --name test acm-uiuc/pytorch
+NV_GPU=[device_id] nvidia-docker run --rm -ti --ipc=host -p 8888:8888  -v /vault/data:/data --name test acm-uiuc/pytorch
 ```
