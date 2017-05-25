@@ -24,6 +24,9 @@ EXPOSE 8888
 RUN mkdir /notebooks
 WORKDIR "/notebooks"
 
+RUN rm /bin/sh &&\
+ln -s /bin/bash /bin/sh
+
 COPY start-jupyter.sh /
 RUN chmod +x /start-jupyter.sh
 
