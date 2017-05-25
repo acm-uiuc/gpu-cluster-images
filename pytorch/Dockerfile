@@ -13,6 +13,7 @@ RUN pip --no-cache-dir install \
         sklearn \
         pandas \
         Pillow \
+        torchvision \
         && \
 python -m ipykernel.kernelspec
 
