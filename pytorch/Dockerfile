@@ -28,6 +28,7 @@ RUN rm /bin/sh &&\
 ln -s /bin/bash /bin/sh
 
 COPY start-jupyter.sh /
+COPY mnist.py /
 RUN chmod +x /start-jupyter.sh
 
 CMD ["/start-jupyter.sh",  "--allow-root"]
