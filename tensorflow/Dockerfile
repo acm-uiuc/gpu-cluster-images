@@ -32,8 +32,11 @@ RUN pip --no-cache-dir install \
         sklearn \
         pandas \
         Pillow \
+        bash_kernel \
         && \
-    python -m ipykernel.kernelspec
+python -m bash_kernel.install \
+        && \
+python -m ipykernel.kernelspec
 
 # Install TensorFlow GPU version.
 RUN pip --no-cache-dir install \
