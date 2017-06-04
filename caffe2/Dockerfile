@@ -52,6 +52,9 @@ RUN pip --no-cache-dir install \
         sklearn \
         pandas \
         Pillow \
+        bash_kernel \
+        && \
+python -m bash_kernel.install \
         && \
 python -m ipykernel.kernelspec
 
@@ -61,9 +64,6 @@ EXPOSE 8888
 
 RUN mkdir /notebooks
 WORKDIR "/notebooks"
-
-RUN rm /bin/sh
-RUN ln -s /bin/bash /bin/sh
 
 COPY start-jupyter.sh /
 COPY mnist.py /
