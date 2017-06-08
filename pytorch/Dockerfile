@@ -28,7 +28,8 @@ RUN mkdir /notebooks
 WORKDIR "/notebooks"
 
 COPY start-jupyter.sh /
-COPY mnist.py /
+RUN mkdir /examples
+COPY mnist.py /examples
 RUN chmod +x /start-jupyter.sh
 
 CMD ["/start-jupyter.sh",  "--allow-root"]

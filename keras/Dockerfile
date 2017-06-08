@@ -43,7 +43,8 @@ RUN pip install keras
 
 COPY jupyter_notebook_config.py /root/.jupyter/
 
-COPY mnist.py /
+RUN mkdir /examples
+COPY mnist.py /examples
 
 COPY start-jupyter.sh /
 
