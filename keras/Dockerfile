@@ -35,9 +35,28 @@ RUN pip --no-cache-dir install \
         && \
     python -m ipykernel.kernelspec
 
+
+RUN pip3 --no-cache-dir install \
+        ipykernel \
+        jupyter \
+        matplotlib \
+        numpy \
+        scipy \
+        sklearn \
+        pandas \
+        Pillow \
+        && \
+    python -m ipykernel.kernelspec
+
 # Install TensorFlow GPU version.
-RUN pip --no-cache-dir install \
-    https://storage.googleapis.com/tensorflow/linux/gpu/tensorflow_gpu-1.1.0-cp35-cp35m-linux_x86_64.whl
+RUN pip3 --no-cache-dir install \
+    tensorflow-gpu
+
+RUN  pip --no-cache-dir install \
+    tensorflow-gpu
+
+
+RUN pip3 install keras
 
 RUN pip install keras
 
