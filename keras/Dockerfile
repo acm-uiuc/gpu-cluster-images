@@ -57,4 +57,4 @@ EXPOSE 8888
 
 WORKDIR "/notebooks"
 
-CMD ["/start-jupyter.sh"]
+CMD ["/start-jupyter.sh",  "--allow-root"]
