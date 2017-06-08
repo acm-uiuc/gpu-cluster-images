@@ -38,10 +38,8 @@ RUN pip --no-cache-dir install \
 # Install TensorFlow GPU version.
 RUN  pip --no-cache-dir install \
     tensorflow-gpu
-    
-RUN pip install keras
 
-RUN ln -s /usr/bin/python3 /usr/bin/python
+RUN pip install keras
 
 COPY jupyter_notebook_config.py /root/.jupyter/
 
