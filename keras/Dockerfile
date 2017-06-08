@@ -35,29 +35,10 @@ RUN pip --no-cache-dir install \
         && \
     python -m ipykernel.kernelspec
 
-
-RUN pip3 --no-cache-dir install \
-        ipykernel \
-        jupyter \
-        matplotlib \
-        numpy \
-        scipy \
-        sklearn \
-        pandas \
-        Pillow \
-        && \
-    python -m ipykernel.kernelspec
-
 # Install TensorFlow GPU version.
-RUN pip3 --no-cache-dir install \
-    tensorflow-gpu
-
 RUN  pip --no-cache-dir install \
     tensorflow-gpu
-
-
-RUN pip3 install keras
-
+    
 RUN pip install keras
 
 RUN ln -s /usr/bin/python3 /usr/bin/python
