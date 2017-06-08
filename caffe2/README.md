@@ -9,5 +9,5 @@ docker build -t acm-uiuc/caffe2 .
 
 Run with NVIDIA Docker 
 ```
-NV_GPU=[device_id] nvidia-docker run --rm -ti --ipc=host -p 8888:8888 -p 6006:6006  -v /vault:/vault --name test acm-uiuc/caffe2
+NV_GPU=[device_id] nvidia-docker run --rm -ti --ipc=host -p 8888:8888  -v /vault:/vault --name test acm-uiuc/caffe2
 ```
