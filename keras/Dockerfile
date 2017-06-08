@@ -45,7 +45,7 @@ COPY jupyter_notebook_config.py /root/.jupyter/
 
 COPY mnist.py /
 
-COPY run_jupyter.sh /
+COPY start-jupyter.sh /
 
 # For CUDA profiling, TensorFlow requires CUPTI.
 ENV LD_LIBRARY_PATH /usr/local/cuda/extras/CUPTI/lib64:$LD_LIBRARY_PATH
@@ -57,4 +57,4 @@ EXPOSE 8888
 
 WORKDIR "/notebooks"
 
-CMD ["/run_jupyter.sh"]
+CMD ["/start-jupyter.sh"]
