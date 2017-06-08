@@ -1,5 +1,5 @@
 #FROM ubuntu:16.04
-FROM caffe2ai/caffe2:gpu-fulloptions-ubuntu16.04
+FROM caffe2ai/caffe2:c2.tutorial.0.7.1
 MAINTAINER Naren Dasan <sivagna2@illinois.edu>
 
 # caffe2 install with cpu support
@@ -52,6 +52,9 @@ RUN pip --no-cache-dir install \
         sklearn \
         pandas \
         Pillow \
+        bash_kernel \
+        && \
+python -m bash_kernel.install \
         && \
 python -m ipykernel.kernelspec
 
@@ -61,9 +64,6 @@ EXPOSE 8888
 
 RUN mkdir /notebooks
 WORKDIR "/notebooks"
-
-RUN rm /bin/sh
-RUN ln -s /bin/bash /bin/sh
 
 COPY start-jupyter.sh /
 COPY mnist.py /
