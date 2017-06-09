@@ -4,6 +4,12 @@ MAINTAINER Naren Dasan <sivagna2@illinois.edu>
 
 WORKDIR /workspace
 RUN chmod -R a+w /workspace
+
+RUN apt update && apt install \
+        vim \
+        emacs24 \
+        nano
+
 RUN pip --no-cache-dir install \
         ipykernel \
         jupyter \
