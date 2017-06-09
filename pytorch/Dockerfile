@@ -8,7 +8,10 @@ RUN chmod -R a+w /workspace
 RUN apt update && apt install \
         vim \
         emacs24 \
-        nano
+        nano \
+       && \
+       apt-get clean && \
+       rm -rf /var/lib/apt/lists/*
 
 RUN pip --no-cache-dir install \
         ipykernel \
