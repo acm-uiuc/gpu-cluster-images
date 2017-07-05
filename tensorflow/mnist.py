@@ -9,7 +9,7 @@ from PIL import Image
 import matplotlib.pyplot as plt
 
 import tensorflow as tf
-from tensorflow.examples.tutorial.mnist import input_data
+from tensorflow.examples.tutorials.mnist import input_data
 from tensorflow.contrib.tensorboard.plugins import projector
 
 STARTER_LEARNING_RATE = 1e-4
@@ -19,7 +19,7 @@ MAX_STEPS = 10000
 IMAGE_SIZE = 28
 IMAGE_PIXELS = IMAGE_SIZE ** 2
 
-def WeightVariable(shape):
+def WeightsVariable(shape):
     return tf.Variable(tf.truncated_normal(shape, stddev=0.1, name='weights'))
 
 def BiasVariable(shape):
@@ -38,28 +38,28 @@ def network(images):
 
     # Convolution 1
     with tf.name_scope('conv1'):
-        weights = WeightsVariable([5,5,1,32])
-        biases = BiasVariable([32])
+        weights = WeightsVariable([5,5,1,20])
+        biases = BiasVariable([20])
         conv1 = tf.nn.relu(Conv2d(images_reshape, weights) + biases)
         pool1 = MaxPool2x2(conv1)
 
     # Convolution 2
     with tf.name_scope('conv2'):
-        weights = WeightsVariable([5,5,32,64])
-        biases = BiasVariable([64])
+        weights = WeightsVariable([5,5,20,50])
+        biases = BiasVariable([50])
         conv2 = tf.nn.relu(Conv2d(pool1, weights) + biases)
         pool2 = MaxPool2x2(conv2)
-        pool2_flat = tf.reshape(pool2, [-1, 7 * 7 * 64])
+        pool2_flat = tf.reshape(pool2, [-1, 800])
 
     # Fully Connected 1
     with tf.name_scope('fc1'):
-        weights = WeightsVariable([7 * 7 * 64, 1024])
-        biases = BiasVariable([1024])
+        weights = WeightsVariable([800, 500])
+        biases = BiasVariable([500])
         fc1 = tf.nn.relu(tf.matmul(pool2_flat, weights) + biases)
 
     # Fully Connected 2
     with tf.name_scope('fc2'):
-        weights = WeightsVariable([1024, 10])
+        weights = WeightsVariable([500, 10])
         biases = BiasVariable([10])
         fc2 = tf.nn.relu(tf.matmul(fc1, weights) + biases)
 
@@ -67,7 +67,7 @@ def network(images):
 
 def LossMetrics(logits, labels):
     labels = tf.to_int64(labels)
-    cross_entropy = tf.nn.sparse_softmax_cross_entropy_with_logits(labels=labels, logits, name='softmax')
+    cross_entropy = tf.nn.sparse_softmax_cross_entropy_with_logits(labels=labels, logits=logits, name='softmax')
     return tf.reduce_mean(cross_entropy, name='softmax_mean')
 
 def training(loss):
@@ -76,7 +76,7 @@ def training(loss):
     learning_rate = tf.train.exponential_decay(STARTER_LEARNING_RATE, global_step, 100000, 0.75, staircase=True)
     tf.summary.scalar('learning rate', learning_rate)
     optimizer = tf.train.GradientDescentOptimizer(learning_rate)
-    train_op = optimizer.minimizer(loss, global_step=global_step)
+    train_op = optimizer.minimize(loss, global_step=global_step)
     return train_op
 
 def evaluation(logits, labels):
@@ -138,7 +138,7 @@ def run_training():
                                        images_placeholder,
                                        labels_placeholder)
             _, loss_value = sess.run([train_op, loss], feed_dict=feed_dict)
-            duration = time.time() = start_time
+            duration = time.time() - start_time
             if step % 100 == 0:
                 print('Step %d: loss = %.2f (%.3f sec)' % (step, loss_value, duration))
                 summary_str = sess.run(summary, feed_dict=feed_dict)
