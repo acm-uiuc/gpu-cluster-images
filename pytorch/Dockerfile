@@ -5,7 +5,7 @@ MAINTAINER Naren Dasan <sivagna2@illinois.edu>
 WORKDIR /workspace
 RUN chmod -R a+w /workspace
 
-RUN apt update && apt install \
+RUN apt update && apt -y install \
         vim \
         emacs24 \
         nano \
@@ -29,7 +29,7 @@ python -m bash_kernel.install \
         && \
 python -m ipykernel.kernelspec
 
-COPY jupyter_notebook_config.py /root/.jupyter/
+#COPY jupyter_notebook_config.py /root/.jupyter/
 
 EXPOSE 8888
 
