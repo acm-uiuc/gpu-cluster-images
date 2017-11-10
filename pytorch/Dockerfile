@@ -29,7 +29,7 @@ python -m bash_kernel.install \
         && \
 python -m ipykernel.kernelspec
 
-#COPY jupyter_notebook_config.py /root/.jupyter/
+COPY jupyter_notebook_config.py /root/.jupyter/
 
 EXPOSE 8888
 
@@ -37,6 +37,7 @@ RUN mkdir /notebooks
 WORKDIR "/notebooks"
 
 COPY start-jupyter.sh /
+COPY jupyter_get.py /
 RUN mkdir /examples
 COPY mnist.py /examples
 RUN chmod +x /start-jupyter.sh
