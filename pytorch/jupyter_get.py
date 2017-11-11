@@ -1,5 +1,19 @@
 from notebook import notebookapp
 
-note = next(notebookapp.list_running_servers())
+count = 0
+is_failed = False
 
-print(note.get('token', ''))
+notebooks = list(notebookapp.list_running_servers())
+
+while len(notebooks) == 0:
+    count += 1
+    #print(count)
+    #if (count == 500):
+    #    is_failed = True
+    #    break
+    notebooks = list(notebookapp.list_running_servers())
+    pass
+
+if (is_failed is not True):
+    note = notebooks[0]
+    print(note.get('token', ''))
