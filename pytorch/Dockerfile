@@ -5,7 +5,7 @@ MAINTAINER Naren Dasan <sivagna2@illinois.edu>
 WORKDIR /workspace
 RUN chmod -R a+w /workspace
 
-RUN apt update && apt install \
+RUN apt update && apt -y install \
         vim \
         emacs24 \
         nano \
@@ -37,6 +37,7 @@ RUN mkdir /notebooks
 WORKDIR "/notebooks"
 
 COPY start-jupyter.sh /
+COPY jupyter_get.py /
 RUN mkdir /examples
 COPY mnist.py /examples
 RUN chmod +x /start-jupyter.sh

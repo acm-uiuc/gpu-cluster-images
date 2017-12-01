@@ -45,7 +45,7 @@ python -m ipykernel.kernelspec
 RUN pip --no-cache-dir install \
     tensorflow-gpu
 
-RUN ln -s /usr/bin/python3 /usr/bin/python
+#RUN ln -s /usr/bin/python3 /usr/bin/python
 
 COPY jupyter_notebook_config.py /root/.jupyter/
 
@@ -53,7 +53,7 @@ RUN mkdir /examples
 COPY mnist.py /examples
 
 COPY start-jupyter.sh /
-
+COPY jupyter_get.py /
 # For CUDA profiling, TensorFlow requires CUPTI.
 ENV LD_LIBRARY_PATH /usr/local/cuda/extras/CUPTI/lib64:$LD_LIBRARY_PATH
 
