@@ -16,10 +16,10 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     rm -rf /var/lib/apt/lists/*
 
 RUN curl -O https://bootstrap.pypa.io/get-pip.py && \
-    python get-pip.py && \
+    python3 get-pip.py && \
     rm get-pip.py
 
-RUN pip --no-cache-dir install \
+RUN pip3 --no-cache-dir install \
         ipykernel \
         jupyter \
         matplotlib \
@@ -30,9 +30,9 @@ RUN pip --no-cache-dir install \
         Pillow \
         bash_kernel \
         && \
-python -m bash_kernel.install \
+python3 -m bash_kernel.install \
         && \
-python -m ipykernel.kernelspec
+python3 -m ipykernel.kernelspec
 
 #RUN ln -s /usr/bin/python3 /usr/bin/python
 
