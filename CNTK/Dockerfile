@@ -1,5 +1,4 @@
-FROM 2.3-gpu-python3.5-cuda8.0-cudnn6.0:latest
-
+FROM microsoft/cntk:2.3-gpu-python3.5-cuda8.0-cudnn6.0
 
 LABEL maintainer "Naren Dasan <sivagna2@illinois.edu>" \
       com.microsoft.cntk.version="2.3"
