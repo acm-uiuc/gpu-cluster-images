@@ -38,9 +38,6 @@ RUN pip --no-cache-dir install \
         pandas \
         Pillow \
         bash_kernel \
-        vim \
-        emacs24 \
-        nano \
         && \
 python -m bash_kernel.install \
         && \
