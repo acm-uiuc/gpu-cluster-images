@@ -61,16 +61,20 @@ python -m bash_kernel.install \
         && \
 python -m ipykernel.kernelspec
 
-COPY jupyter_notebook_config.py /root/.jupyter/
-
 EXPOSE 8888
 
-RUN mkdir /notebooks
-WORKDIR "/notebooks"
+RUN mkdir /opt/cluster-client
+RUN cd /opt/cluster-client
 
-COPY start-jupyter.sh /
+COPY start-jupyter.sh /opt/cluster-client
+COPY jupyter_get.py /opt/cluster-client
 RUN mkdir /examples
 COPY mnist.py /examples
-RUN chmod +x /start-jupyter.sh
+COPY jupyter_notebook_config.py /root/.jupyter/
+RUN chmod +x /opt/cluster-client/start-jupyter.sh
 
-CMD ["/start-jupyter.sh", "--allow-root"]
+WORKDIR "/vault"
+
+CMD ["/opt/cluster-client/start-jupyter.sh",  "--allow-root"]
+
+

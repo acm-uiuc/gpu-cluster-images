@@ -2,9 +2,6 @@ FROM pytorch-cudnnv6
 
 MAINTAINER Naren Dasan <sivagna2@illinois.edu>
 
-WORKDIR /workspace
-RUN chmod -R a+w /workspace
-
 RUN apt update && apt -y install \
         vim \
         emacs24 \
@@ -23,25 +20,31 @@ RUN pip --no-cache-dir install \
         pandas \
         Pillow \
         torchvision \
+        tensorflow \
+        tensorboardX \
         bash_kernel \
         && \
 python -m bash_kernel.install \
         && \
 python -m ipykernel.kernelspec
 
-COPY jupyter_notebook_config.py /root/.jupyter/
-
+# TensorBoard
+EXPOSE 6006
+# Jupyter
 EXPOSE 8888
 
-RUN mkdir /notebooks
-WORKDIR "/notebooks"
+RUN mkdir /opt/cluster-client
+RUN cd /opt/cluster-client
 
-COPY start-jupyter.sh /
-COPY jupyter_get.py /
+COPY start-jupyter.sh /opt/cluster-client
+COPY jupyter_get.py /opt/cluster-client
 RUN mkdir /examples
 COPY mnist.py /examples
-RUN chmod +x /start-jupyter.sh
+COPY jupyter_notebook_config.py /root/.jupyter/
+RUN chmod +x /opt/cluster-client/start-jupyter.sh
 
-CMD ["/start-jupyter.sh",  "--allow-root"]
+WORKDIR "/vault"
+
+CMD ["/opt/cluster-client/start-jupyter.sh",  "--allow-root"]
 
 
