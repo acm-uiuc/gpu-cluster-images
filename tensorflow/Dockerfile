@@ -57,8 +57,8 @@ EXPOSE 6006
 # IPython
 EXPOSE 8888
 
-RUN mkdir /opt/cluster-client
-RUN cd /opt/cluster-client
+RUN mkdir /opt/cluster-container
+RUN cd /opt/cluster-container
 
 COPY start-jupyter.sh /opt/cluster-container
 COPY jupyter_get.py /opt/cluster-container
