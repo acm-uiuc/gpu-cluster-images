@@ -1,4 +1,4 @@
-FROM pytorch-cudnnv6
+FROM pytorch_cuda9
 
 MAINTAINER Naren Dasan <sivagna2@illinois.edu>
 
