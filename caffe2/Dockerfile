@@ -5,7 +5,27 @@ MAINTAINER Naren Dasan <sivagna2@illinois.edu>
 # caffe2 install with cpu support
 
 ########## INSTALLATION STEPS ###################
-RUN apt-get install unzip vim emacs nano -y --no-install-recommends
+RUN apt-get update && apt-get install -y --no-install-recommends \
+        build-essential \
+        curl \
+        libfreetype6-dev \
+        libpng12-dev \
+        libzmq3-dev \
+        pkg-config \
+        ca-certificates \
+        wget \
+        python \
+        python-dev \
+        rsync \
+        software-properties-common \
+        unzip \
+        vim \
+        emacs24 \
+        nano \
+        && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
+    
 RUN pip install requests
 
 RUN pip --no-cache-dir install \

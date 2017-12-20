@@ -7,13 +7,24 @@ LABEL maintainer "Naren Dasan <sivagna2@illinois.edu>" \
 ENV CNTK_VERSION="2.3"
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
-    # General
+        build-essential \
+        curl \
+        libfreetype6-dev \
+        libpng12-dev \
+        libzmq3-dev \
+        pkg-config \
         ca-certificates \
         wget \
+        python \
+        python-dev \
+        rsync \
+        software-properties-common \
+        unzip \
+        vim \
+        emacs24 \
+        nano \
         && \
-    # Clean-up
-    apt-get -y autoremove \
-        && \
+    apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
 # Get CNTK Binary Distribution
