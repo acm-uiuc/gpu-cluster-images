@@ -1,4 +1,4 @@
-FROM nvidia/cuda:8.0-cudnn6-devel-ubuntu16.04
+FROM 2.3-gpu-python3.5-cuda8.0-cudnn6.0:latest
 
 
 LABEL maintainer "Naren Dasan <sivagna2@illinois.edu>" \
@@ -7,18 +7,6 @@ LABEL maintainer "Naren Dasan <sivagna2@illinois.edu>" \
 ENV CNTK_VERSION="2.3"
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
-        build-essential \
-        curl \
-        libfreetype6-dev \
-        libpng12-dev \
-        libzmq3-dev \
-        pkg-config \
-        ca-certificates \
-        wget \
-        python \
-        python-dev \
-        rsync \
-        software-properties-common \
         unzip \
         vim \
         emacs24 \
@@ -26,15 +14,6 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
         && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
-
-# Get CNTK Binary Distribution
-RUN CNTK_VERSION_DASHED=$(echo $CNTK_VERSION | tr . -) && \
-    CNTK_SHA256="013d1050f2f8d7240274e140f41b01a29508f2296388728aababb776fef58667" && \
-    wget -q https://cntk.ai/BinaryDrop/CNTK-${CNTK_VERSION_DASHED}-Linux-64bit-GPU.tar.gz && \
-    echo "$CNTK_SHA256 CNTK-${CNTK_VERSION_DASHED}-Linux-64bit-GPU.tar.gz" | sha256sum --check --strict - && \
-    tar -xzf CNTK-${CNTK_VERSION_DASHED}-Linux-64bit-GPU.tar.gz && \
-    rm -f CNTK-${CNTK_VERSION_DASHED}-Linux-64bit-GPU.tar.gz && \
-    /bin/bash /cntk/Scripts/install/linux/install-cntk.sh --py-version 35 --docker
 
 RUN curl -O https://bootstrap.pypa.io/get-pip.py && \
     python get-pip.py && \
