@@ -51,16 +51,16 @@ EXPOSE 6006
 # IPython
 EXPOSE 8888
 
-RUN mkdir /opt/cluster-client
-RUN cd /opt/cluster-client
+RUN mkdir /opt/cluster-container
+RUN cd /opt/cluster-container
 
-COPY start-jupyter.sh /opt/cluster-client
-COPY jupyter_get.py /opt/cluster-client
+COPY start-jupyter.sh /opt/cluster-container
+COPY jupyter_get.py /opt/cluster-container
 RUN mkdir /examples
 COPY mnist.py /examples
 COPY jupyter_notebook_config.py /root/.jupyter/
-RUN chmod +x /opt/cluster-client/start-jupyter.sh
+RUN chmod +x /opt/cluster-container/start-jupyter.sh
 
 WORKDIR "/vault"
 
-CMD ["/opt/cluster-client/start-jupyter.sh",  "--allow-root"]
+CMD ["/opt/cluster-container/start-jupyter.sh",  "--allow-root"]
