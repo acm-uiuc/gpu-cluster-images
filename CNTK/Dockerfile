@@ -1,7 +1,7 @@
 FROM nvidia/cuda:8.0-cudnn6-devel-ubuntu16.04
 
 
-LABEL maintainer "Naren Dasan <sivagna2@illinois.edu" \
+LABEL maintainer "Naren Dasan <sivagna2@illinois.edu>" \
       com.microsoft.cntk.version="2.3"
 
 ENV CNTK_VERSION="2.3"
