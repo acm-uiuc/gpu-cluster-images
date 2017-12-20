@@ -19,7 +19,6 @@ RUN pip --no-cache-dir install \
         sklearn \
         pandas \
         Pillow \
-        torchvision \
         tensorflow \
         tensorboardX \
         bash_kernel \
