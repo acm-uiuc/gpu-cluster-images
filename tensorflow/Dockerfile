@@ -1,33 +1,10 @@
-FROM nvidia/cuda:8.0-cudnn6-devel-ubuntu16.04
+FROM acmuiuc/cuda:8.0-cudnn6
 
 MAINTAINER Naren Dasan <sivagna2@illinois.edu>
 
-# Pick up some TF dependencies
-RUN apt-get update && apt-get install -y --no-install-recommends \
-        build-essential \
-        curl \
-        libfreetype6-dev \
-        libpng12-dev \
-        libzmq3-dev \
-        pkg-config \
-        python \
-        python-dev \
-        rsync \
-        software-properties-common \
-        unzip \
-        vim \
-        emacs24 \
-        nano \
-        && \
-    apt-get clean && \
-    rm -rf /var/lib/apt/lists/*
-
-RUN curl -O https://bootstrap.pypa.io/get-pip.py && \
-    python get-pip.py && \
-    rm get-pip.py
-
-RUN pip --no-cache-dir install \
-        ipykernel \
+RUN pip3 --no-cache-dir install \
+        setuptools \
+	ipykernel \
         jupyter \
         matplotlib \
         numpy \
@@ -37,12 +14,12 @@ RUN pip --no-cache-dir install \
         Pillow \
         bash_kernel \
         && \
-python -m bash_kernel.install \
+python3 -m bash_kernel.install \
         && \
-python -m ipykernel.kernelspec
+python3 -m ipykernel.kernelspec
 
 # Install TensorFlow GPU version.
-RUN pip --no-cache-dir install \
+RUN pip3 --no-cache-dir install \
     tensorflow-gpu
 
 #RUN ln -s /usr/bin/python3 /usr/bin/python
