@@ -1,32 +1,12 @@
-FROM nvidia/cuda:8.0-cudnn6-devel-ubuntu16.04
+FROM acmuiuc/cuda:9.0-cudnn7
 
 MAINTAINER Naren Dasan <sivagna2@illinois.edu>
 
-# Pick up some TF dependencies
-RUN apt-get update && apt-get install -y --no-install-recommends \
-        build-essential \
-        curl \
-        libfreetype6-dev \
-        libpng12-dev \
-        libzmq3-dev \
-        pkg-config \
-        python \
-        python-dev \
-        rsync \
-        software-properties-common \
-        unzip \
-        vim \
-        emacs24 \
-        nano \
-        && \
-    apt-get clean && \
-    rm -rf /var/lib/apt/lists/*
-
 RUN curl -O https://bootstrap.pypa.io/get-pip.py && \
-    python get-pip.py && \
+    python3 get-pip.py && \
     rm get-pip.py
 
-RUN pip --no-cache-dir install \
+RUN pip3 --no-cache-dir install \
         ipykernel \
         jupyter \
         matplotlib \
@@ -36,13 +16,13 @@ RUN pip --no-cache-dir install \
         pandas \
         Pillow \
         && \
-    python -m ipykernel.kernelspec
+    python3 -m ipykernel.kernelspec
 
 # Install TensorFlow GPU version.
-RUN  pip --no-cache-dir install \
+RUN  pip3 --no-cache-dir install \
     tensorflow-gpu
 
-RUN pip install keras
+RUN pip3 install keras
 # For CUDA profiling, TensorFlow requires CUPTI.
 ENV LD_LIBRARY_PATH /usr/local/cuda/extras/CUPTI/lib64:$LD_LIBRARY_PATH
 

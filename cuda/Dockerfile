@@ -1,4 +1,4 @@
-FROM nvidia/cuda:8.0-cudnn6-devel-ubuntu16.04
+FROM nvidia/cuda:9.0-cudnn7-devel-ubuntu16.04
 
 MAINTAINER Naren Dasan <sivagna2@illinois.edu>
 
@@ -14,7 +14,25 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
         python3-dev \
         python3-pip \
         python3-setuptools \
-        rsync \
+    	cmake \
+    	git \
+    	libgflags-dev \
+    	libgoogle-glog-dev \
+    	libgtest-dev \
+   	libiomp-dev \
+   	libleveldb-dev \
+    	liblmdb-dev \
+    	libopencv-dev \
+    	libopenmpi-dev \
+    	libprotobuf-dev \
+    	libsnappy-dev \
+    	openmpi-bin \
+    	openmpi-doc \
+    	protobuf-compiler \
+    	python3-numpy \
+    	python3-pydot \
+    	python3-scipy \
+	rsync \
         software-properties-common \
         unzip \
         vim \
@@ -24,4 +42,3 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
-ENTRYPOINT /bin/bash

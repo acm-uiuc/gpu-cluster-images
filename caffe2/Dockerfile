@@ -1,47 +1,61 @@
-#FROM ubuntu:16.04
-FROM caffe2ai/caffe2:c2v0.8.1.cuda8.cudnn7.ubuntu16.04
+FROM acmuiuc/cuda:9.0-cudnn7
 MAINTAINER Naren Dasan <sivagna2@illinois.edu>
 
-# caffe2 install with cpu support
+# caffe2 install with gpu support
 
-########## INSTALLATION STEPS ###################
-RUN apt-get update && apt-get install -y --no-install-recommends \
-        build-essential \
-        curl \
-        libfreetype6-dev \
-        libpng12-dev \
-        libzmq3-dev \
-        pkg-config \
-        ca-certificates \
-        wget \
-        python \
-        python-dev \
-        rsync \
-        software-properties-common \
-        unzip \
-        vim \
-        emacs24 \
-        nano \
-        && \
-    apt-get clean && \
-    rm -rf /var/lib/apt/lists/*
-    
-RUN pip install requests
+RUN pip3 install --no-cache-dir --upgrade pip setuptools wheel && \
+    pip3 install --no-cache-dir \
+    flask \
+    future \
+    graphviz \
+    hypothesis \
+    jupyter \
+    matplotlib \
+    numpy \
+    protobuf \
+    pydot \
+    python-nvd3 \
+    pyyaml \
+    requests \
+    scikit-image \
+    scipy \
+    setuptools \
+    six \
+    tornado
 
-RUN pip --no-cache-dir install \
+RUN apt-get -qq update && apt-get -qq -y install curl bzip2 \
+    && curl -sSL https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -o /tmp/miniconda.sh \
+    && bash /tmp/miniconda.sh -bfp /usr/local \
+    && rm -rf /tmp/miniconda.sh \
+    && conda install -y python=3 \
+    && conda update conda \
+    && apt-get -qq -y remove curl bzip2 \
+    && apt-get -qq -y autoremove \
+    && apt-get autoclean \
+    && rm -rf /var/lib/apt/lists/* /var/log/dpkg.log \
+    && conda clean --all --yes
+
+ENV PYTHONPATH /usr/local
+   
+RUN python3 -m pip --no-cache-dir install \
         ipykernel \
-        jupyter \
         matplotlib \
-        numpy \
-        scipy \
         sklearn \
         pandas \
         Pillow \
         bash_kernel \
+        flask \
+    	pydot \
+	ipython \
+    	leveldb \
+    	lmdb \
+    	notebook \
+	 && \
+python3 -m bash_kernel.install \
         && \
-python -m bash_kernel.install \
-        && \
-python -m ipykernel.kernelspec
+python3 -m ipykernel.kernelspec
+
+RUN conda install -c caffe2 caffe2-cuda9.0-cudnn7
 
 EXPOSE 8888
 

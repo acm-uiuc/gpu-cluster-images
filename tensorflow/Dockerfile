@@ -1,4 +1,4 @@
-FROM acmuiuc/cuda:8.0-cudnn6
+FROM acmuiuc/cuda:9.0-cudnn7
 
 MAINTAINER Naren Dasan <sivagna2@illinois.edu>
 
@@ -47,4 +47,3 @@ RUN chmod +x /opt/cluster-container/start-jupyter.sh
 WORKDIR "/vault"
 
 CMD ["/opt/cluster-container/start-jupyter.sh",  "--allow-root"]
-
