@@ -7,6 +7,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
         build-essential \
         curl \
         libfreetype6-dev \
+	graphviz \
         libpng12-dev \
         libzmq3-dev \
         pkg-config \
