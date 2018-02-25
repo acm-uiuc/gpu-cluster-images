@@ -1,9 +1,9 @@
-FROM microsoft/cntk:2.3-gpu-python3.5-cuda8.0-cudnn6.0
+FROM acmuiuc/cuda:9.0-cudnn7
 
 LABEL maintainer "Naren Dasan <sivagna2@illinois.edu>" \
-      com.microsoft.cntk.version="2.3"
+      com.microsoft.cntk.version="2.4"
 
-ENV CNTK_VERSION="2.3"
+ENV CNTK_VERSION="2.4"
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
         unzip \
@@ -18,6 +18,9 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 RUN curl -O https://bootstrap.pypa.io/get-pip.py && \
     python3 get-pip.py && \
     rm get-pip.py
+
+RUN pip3 --no-cache-dir install \
+	https://cntk.ai/PythonWheel/GPU/cntk-2.4-cp35-cp35m-linux_x86_64.whl
 
 RUN pip3 --no-cache-dir install \
         ipykernel \

@@ -1,21 +1,15 @@
-FROM mxnet/python:gpu
+FROM acmuiuc/cuda:9.0-cudnn7
 
 MAINTAINER Naren Dasan <sivagna2@illinois.edu>
 
-RUN apt-get update && apt-get -y install \
-        vim \
-        emacs24 \
-        nano \
-       && \
-       apt-get clean && \
-       rm -rf /var/lib/apt/lists/*
-
-RUN pip --no-cache-dir install \
-        ipykernel \
+RUN pip3 --no-cache-dir install \
+        mxnet-cu90==1.0.0 \
+	ipykernel \
         jupyter \
         matplotlib \
         numpy \
         scipy \
+	graphviz \
         sklearn \
         pandas \
         Pillow \
@@ -23,9 +17,9 @@ RUN pip --no-cache-dir install \
         tensorboardX \
         bash_kernel \
         && \
-python -m bash_kernel.install \
+python3 -m bash_kernel.install \
         && \
-python -m ipykernel.kernelspec
+python3 -m ipykernel.kernelspec
 
 # TensorBoard
 EXPOSE 6006
